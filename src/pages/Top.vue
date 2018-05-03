@@ -1,13 +1,13 @@
 <template>
   <div>
-    <router-view></router-view>
+    bbb
   </div>
 </template>
 
 <script lang="ts">
   export default {
     created() {
-      this.$router.push('/');
+      console.log("top");
     }
   }
 </script>

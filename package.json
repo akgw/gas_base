@@ -1,14 +1,15 @@
 {
   "dependencies": {
     "@google/clasp": "^1.1.5",
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1"
   },
   "scripts": {
     "login": "clasp login",
     "pull": "clasp pull",
     "push": "clasp push",
-    "build":
-        "webpack --mode development --config webpack.config.js && sh setScriptTag.sh"
+    "build": "webpack --mode development --config webpack.config.js && sh setScriptTag.sh",
+    "deploy": "yarn run build && yarn run push"
   },
   "devDependencies": {
     "css-loader": "^0.28.11",
