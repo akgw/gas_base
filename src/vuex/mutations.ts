@@ -1,5 +1,5 @@
 import { MutationTree } from 'vuex';
-import {IAuthState} from './modules/auth';
+import { IAuthState } from './modules/auth';
 
 export const authMutations: MutationTree<IAuthState> = {
 

@@ -1,5 +1,5 @@
 import { ActionContext, ActionTree } from 'vuex';
-import {IAuthState} from "./modules/auth";
+import { IAuthState } from './modules/auth';
 
 export const authActions: ActionTree<IAuthState, IAuthState> = {
 

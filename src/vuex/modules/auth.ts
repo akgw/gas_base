@@ -8,7 +8,7 @@ import { authMutations } from '../mutations';
 const getters: GetterTree<IAuthState, IAuthState> = {
   authState: (state: IAuthState) => {
     return state;
-  }
+  },
 };
 
 /**

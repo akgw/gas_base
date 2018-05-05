@@ -9,6 +9,7 @@
     "login": "clasp login",
     "pull": "clasp pull",
     "push": "clasp push",
+    "tslint:fix": "tslint --fix --project tsconfig.json './src/**/*.ts'",
     "build": "webpack --mode development --config webpack.config.js && sh setScriptTag.sh",
     "deploy": "yarn run build && yarn run push"
   },
@@ -17,6 +18,8 @@
     "dotenv": "^5.0.1",
     "dotenv-webpack": "^1.5.5",
     "ts-loader": "^4.2.0",
+    "tslint": "^5.10.0",
+    "tslint-config-airbnb": "^5.8.0",
     "typescript": "^2.8.3",
     "vue-loader": "^14.0.6",
     "vue-template-compiler": "^2.5.16",
