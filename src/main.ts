@@ -1,11 +1,14 @@
 import Vue from 'vue';
-import App from './App.vue';
 import router from './router';
+import App from './App.vue';
+import store from './vuex';
 import { sync } from './routerSync';
+
 sync(router);
 
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App, {}),
 });
