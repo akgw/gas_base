@@ -5,85 +5,78 @@ function doGet(e) {
 }
 
 /**
- * ターンを取得
- * @returns {*}
- */
-function sendFetchTurn() {
-  const sheet = SpreadsheetApp.getActive().getSheetByName('board');
-  const value = sheet.getRange("J1").getValue();
-  return value === '' ? 1 : value;
-}
-
-/**
- * ターンを更新
- * @returns {*}
- */
-function sendUpdateTurn(turn) {
-  const sheet = SpreadsheetApp.getActive().getSheetByName('board');
-  sheet.getRange("J1").setValue(turn);
-}
-
-/**
- * 盤面の状態を取得
- * @returns {*}
- */
-function sendFetchBoard() {
-  const sheet = SpreadsheetApp.getActive().getSheetByName('board');
-  const values = sheet.getRange("A1:H8").getValues();
-
-  for (var key1 in values) {
-    for (var key2 in values[key1]) {
-      if (values[key1][key2] !== '') {
-        continue;
-      }
-      values[key1][key2] = '　';
-    }
-  }
-  return values;
-}
-
-/**
- * 盤面の状態を更新
- */
-function sendWriteBoard(board) {
-  const sheet = SpreadsheetApp.getActive().getSheetByName('board');
-  for (var key in board) {
-    var row = parseInt(key) + 1;
-    var range = sheet.getRange("A" + row + ":H" + row);
-
-    range.setValues([board[key]]);
-  }
-
-}
-
-/**
- * 盤面関係なくとりあえず更新
- */
-function sendPutStone(row, column, stone) {
-  row = convertRow(row);
-  column = convertColumn(column);
-  const sheet = SpreadsheetApp.getActive().getSheetByName('board');
-  sheet.getRange(column + row).setValue(stone);
-}
-
-/**
- * 列を変換
+ * シートの指定座標のデータを単一取得
  *
- * @param row
- * @returns {*[]}
+ * @param sheetName
+ * @param x
+ * @param y
+ * @returns {Object}
  */
-function convertRow(row) {
-  row += 1;
-  return row;
+function sendFetchCell(sheetName, x, y) {
+  const sheet = SpreadsheetApp.getActive().getSheetByName(sheetName);
+  return sheet.getRange(convertX(x) + convertY(y)).getValue();
 }
 
 /**
- * 行を変換
+ * シートの指定座標のデータを複数取得
+ *
+ * @param sheetName
+ * @param fromX
+ * @param fromY
+ * @param toX
+ * @param toY
+ * @returns {Range}
+ */
+function sendFetchRangeCell(sheetName, fromX, fromY, toX, toY) {
+  const sheet = SpreadsheetApp.getActive().getSheetByName(sheetName);
+  return sheet.getRange(convertX(fromX) + convertY(fromY) + ":" + convertX(toX) + convertY(toY)).getValues();
+}
+
+/**
+ * シートの指定座標の値を更新
+ *
+ * @param sheetName
+ * @param x
+ * @param y
+ */
+function sendPutCell(sheetName, x, y, value) {
+  const sheet = SpreadsheetApp.getActive().getSheetByName(sheetName);
+  sheet.getRange(convertX(x) + convertY(y)).setValue(value);
+}
+
+/**
+ * シートの指定座標の値を複数更新
+ *
+ * @param sheetName
+ * @param array
+ */
+function sendPutRangeCell(sheetName, array, minX, maxX) {
+  const sheet = SpreadsheetApp.getActive().getSheetByName(sheetName);
+
+  for (var y in array) {
+    var range = sheet.getRange(convertX(minX) + convertY(y) + ":" + convertX(maxX) + convertY(y));
+
+    range.setValues([array[y]]);
+  }
+}
+
+/**
+ * yを変換
+ *
+ * @param y
+ * @returns {number}
+ */
+function convertY(y) {
+  return parseInt(y) + 1;
+}
+
+/**
+ * xを変換
  *
  * @param column
  * @returns {*}
  */
-function convertColumn(column) {
+function convertX(x) {
   const convertForSheet = {
     0: 'A',
     1: 'B',
@@ -95,6 +88,5 @@ function convertColumn(column) {
     7: 'H',
   };
 
-  return convertForSheet[column];
+  return convertForSheet[x];
 }
-

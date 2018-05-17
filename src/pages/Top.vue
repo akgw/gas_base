@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ $store.getters.authState }}
+    <p>{{ $store.getters.authState }}</p>
     <button @click="sendLoading">testSend</button>
   </div>
 </template>
