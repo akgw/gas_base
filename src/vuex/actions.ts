@@ -1,6 +1,8 @@
 import { ActionContext, ActionTree } from 'vuex';
 import { ITurnState } from './modules/turn';
 import { Turn } from '../domain/Turn';
+import { Board } from '../domain/Board';
+import { IBoardState } from './modules/board';
 
 export const turnActions: ActionTree<ITurnState, ITurnState> = {
   /**
@@ -9,13 +11,11 @@ export const turnActions: ActionTree<ITurnState, ITurnState> = {
    * @param {Commit} commit
    */
   getTurn({ commit }: ActionContext<ITurnState, ITurnState>) {
-    Turn.read()
-        .then((value) => {
-          commit('setTurn');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    Turn.read().then((value) => {
+      commit('setTurn', value);
+    }).catch((error) => {
+      console.log(error);
+    });
   },
 
   /**
@@ -24,12 +24,35 @@ export const turnActions: ActionTree<ITurnState, ITurnState> = {
    * @param {Commit} commit
    */
   changeTurn({ commit }: ActionContext<ITurnState, ITurnState>) {
-    Turn.change()
-        .then(() => {
-
-        })
-        .catch(() => {
-
-        });
+    Turn.change().then((value) => {
+      commit('setTurn', value);
+    }).catch((error) => {
+      console.log(error);
+    });
   },
+};
+
+export const boardActions: ActionTree<IBoardState, IBoardState> = {
+  /**
+   * 盤面の初期化
+   *
+   * @param {Commit} commit
+   */
+  clearBoard({ commit }: ActionContext<IBoardState, IBoardState>) {
+    Board.initialize();
+  },
+
+  /**
+   * 盤面の取得
+   *
+   * @param {Commit} commit
+   */
+  readAll({ commit }: ActionContext<IBoardState, IBoardState>) {
+    Board.readAll().then((value) => {
+      commit('setBoard', value);
+      }).catch((error) => {
+        console.log(error);
+      });
+  },
+
 };

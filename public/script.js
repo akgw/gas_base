@@ -62,3 +62,14 @@ function sendWriteRangeCell(sheetName, array, minX, maxX) {
     range.setValues([array[y]]);
   }
 }
+
+/**
+ * シートを初期化する
+ *
+ * @param sheetName
+ * @returns {GoogleAppsScript.Spreadsheet.Sheet}
+ */
+function sendClearSheet(sheetName) {
+  const sheet = SpreadsheetApp.getActive().getSheetByName(sheetName);
+  return sheet.clear();
+}

@@ -42,6 +42,7 @@ export namespace Turn {
    */
   export const change = async () => {
     const value = await nextTurn();
-    return Gas.writeCell(sheetName, 0, 0, value);
+    Gas.writeCell(sheetName, 0, 0, value);
+    return Promise.resolve(value);
   };
 }
