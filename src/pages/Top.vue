@@ -2,6 +2,7 @@
   <div>
     <p>{{ $store.getters.authState }}</p>
     <button @click="sendLoading">testSend</button>
+    <button @click="changeTurn">change</button>
   </div>
 </template>
 
@@ -10,12 +11,11 @@
     methods: {
       sendLoading() {
         this.$store.dispatch('getTurn');
+      },
+      changeTurn() {
+        this.$store.dispatch('changeTurn');
       }
     },
-
-    created() {
-      console.log("top");
-    }
   }
 </script>
 

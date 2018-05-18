@@ -3,7 +3,11 @@ import { ITurnState } from './modules/turn';
 import { Turn } from '../domain/Turn';
 
 export const turnActions: ActionTree<ITurnState, ITurnState> = {
-
+  /**
+   * ターンの取得
+   *
+   * @param {Commit} commit
+   */
   getTurn({ commit }: ActionContext<ITurnState, ITurnState>) {
     Turn.read()
         .then((value) => {
@@ -14,14 +18,18 @@ export const turnActions: ActionTree<ITurnState, ITurnState> = {
         });
   },
 
+  /**
+   * ターンの変更
+   *
+   * @param {Commit} commit
+   */
   changeTurn({ commit }: ActionContext<ITurnState, ITurnState>) {
-    Turn.write()
-        .then((value) => {
+    Turn.change()
+        .then(() => {
 
         })
         .catch(() => {
 
         });
   },
-
 };
