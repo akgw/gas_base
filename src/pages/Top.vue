@@ -9,7 +9,7 @@
   export default {
     methods: {
       sendLoading() {
-        this.$store.dispatch('testChangeState');
+        this.$store.dispatch('getTurn');
       }
     },
 

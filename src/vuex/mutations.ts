@@ -1,10 +1,10 @@
 import { MutationTree } from 'vuex';
-import { IAuthState } from './modules/auth';
+import { ITurnState } from './modules/turn';
 
-export const authMutations: MutationTree<IAuthState> = {
+export const turnMutations: MutationTree<ITurnState> = {
 
-  loadingTrue(state: IAuthState): void {
-    state.loading = true;
+  setTurn(state: ITurnState, turn: number): void {
+    state.turn = turn;
   },
 
 };

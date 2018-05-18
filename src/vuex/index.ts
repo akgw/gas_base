@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import Vuex, { ModuleTree } from 'vuex';
-import { authModule } from './modules/auth';
+import { turnModule } from './modules/turn';
 
 Vue.use(Vuex);
 
 const modules: ModuleTree<any> = {
-  auth: authModule,
+  turn: turnModule,
 };
 
 export default new Vuex.Store({

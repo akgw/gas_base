@@ -1,12 +1,27 @@
 import { ActionContext, ActionTree } from 'vuex';
-import { IAuthState } from './modules/auth';
-import {Turn} from "../domain/Turn";
+import { ITurnState } from './modules/turn';
+import { Turn } from '../domain/Turn';
 
-export const authActions: ActionTree<IAuthState, IAuthState> = {
+export const turnActions: ActionTree<ITurnState, ITurnState> = {
 
-  testChangeState({ commit }: ActionContext<IAuthState, IAuthState>) {
-    Turn.fetch();
-    commit('loadingTrue');
+  getTurn({ commit }: ActionContext<ITurnState, ITurnState>) {
+    Turn.read()
+        .then((value) => {
+          commit('setTurn');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  },
+
+  changeTurn({ commit }: ActionContext<ITurnState, ITurnState>) {
+    Turn.write()
+        .then((value) => {
+
+        })
+        .catch(() => {
+
+        });
   },
 
 };
