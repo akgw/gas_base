@@ -9,8 +9,9 @@
     <table class="board">
       <tr v-for="row in $store.getters.board">
         <td v-for="cell in row" class="cell">
-          <span v-if="cell === 0">○</span>
-          <span v-else-if="cell === 1">●</span>
+          <span v-if="cell === 0" class="color-white">●</span>
+          <span v-else-if="cell === 1" class="color-black">●</span>
+          <span v-else @click="putStone"></span>
         </td>
       </tr>
     </table>
@@ -32,6 +33,9 @@
       },
       readAll() {
         this.$store.dispatch('readAll');
+      },
+      putStone() {
+        this.$store.dispatch('putStone');
       }
     },
   }
@@ -46,5 +50,12 @@
     text-align: center;
     width: 50px;
     height: 50px;
+    font-size: 2rem;
+  }
+  .color-white {
+    color: white;
+  }
+  .color-black {
+    color: black;
   }
 </style>

@@ -3,6 +3,7 @@ import { ITurnState } from './modules/turn';
 import { Turn } from '../domain/Turn';
 import { Board } from '../domain/Board';
 import { IBoardState } from './modules/board';
+import {IStoneState} from "./modules/stone";
 
 export const turnActions: ActionTree<ITurnState, ITurnState> = {
   /**
@@ -55,4 +56,15 @@ export const boardActions: ActionTree<IBoardState, IBoardState> = {
       });
   },
 
+};
+
+export const stoneActions: ActionTree<IStoneState, IStoneState> = {
+  /**
+   * 盤面の初期化
+   *
+   * @param {Commit} commit
+   */
+  putStone ({ commit }: ActionContext<IStoneState, IStoneState>) {
+    Stone();
+  },
 };
