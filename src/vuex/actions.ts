@@ -2,8 +2,8 @@ import { ActionContext, ActionTree } from 'vuex';
 import { ITurnState } from './modules/turn';
 import { Turn } from '../domain/Turn';
 import { Board } from '../domain/Board';
-import { IBoardState } from './modules/board';
-import {IStoneState} from "./modules/stone";
+import { Stone } from '../domain/Stone';
+import { IBoardState, ICell } from './modules/board';
 
 export const turnActions: ActionTree<ITurnState, ITurnState> = {
   /**
@@ -58,13 +58,20 @@ export const boardActions: ActionTree<IBoardState, IBoardState> = {
 
 };
 
-export const stoneActions: ActionTree<IStoneState, IStoneState> = {
+export const stoneActions: any = {
   /**
-   * 盤面の初期化
+   * 石を置く
    *
    * @param {Commit} commit
+   * @param {x: number; y: number} payload
    */
-  putStone ({ commit }: ActionContext<IStoneState, IStoneState>) {
-    Stone();
+  putStone ({ commit }: ActionContext<any, any>, payload: {x: number, y: number}) {
+    // 最新の盤面を取得
+    Board.readAll().then((board: ICell) => {
+      Stone.put(payload.x, payload.y, board);
+    }).catch((error) => {
+      console.log(error);
+    });
+
   },
 };

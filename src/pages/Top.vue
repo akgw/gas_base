@@ -7,11 +7,11 @@
     <button @click="clearBoard">clear</button>
     <button @click="readAll">readAll</button>
     <table class="board">
-      <tr v-for="row in $store.getters.board">
-        <td v-for="cell in row" class="cell">
+      <tr v-for="(row, y) in $store.getters.board">
+        <td v-for="(cell, x) in row" class="cell">
           <span v-if="cell === 0" class="color-white">●</span>
           <span v-else-if="cell === 1" class="color-black">●</span>
-          <span v-else @click="putStone"></span>
+          <span v-else @click="putStone(x, y)">ま</span>
         </td>
       </tr>
     </table>
@@ -34,8 +34,8 @@
       readAll() {
         this.$store.dispatch('readAll');
       },
-      putStone() {
-        this.$store.dispatch('putStone');
+      putStone(x: number, y: number) {
+        this.$store.dispatch('putStone', {x:x, y:y});
       }
     },
   }
